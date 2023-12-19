@@ -15,6 +15,7 @@ export class LoginUserResponse {
         userId: 1,
         username: 'Ivan',
         password: 'ivan123',
+        status: 'kur',
       },
     },
   })
@@ -22,6 +23,7 @@ export class LoginUserResponse {
     userId: number;
     username: string;
     password: string;
+    status: string;
   };
 
   @ApiProperty({ example: 'Logged in' })
@@ -42,6 +44,9 @@ export class LoginCheckResponse {
 
   @ApiProperty({ example: 'ivan@gmail.com' })
   email: string;
+
+  @ApiProperty({ example: 'Kurier' })
+  status: string;
 }
 
 export class SignupResponse {
@@ -58,6 +63,9 @@ export class SignupResponse {
 
   @ApiProperty({ example: 'ivan@gmail.com' })
   email: string;
+
+  @ApiProperty({ example: 'Kurier' })
+  status: string;
 
   @ApiProperty({ example: '2023-03-17T17:23:33.502Z' })
   updatedAt: string;

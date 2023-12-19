@@ -12,7 +12,7 @@ export class UsersService {
   ) {}
 
   findOne(filter: {
-    where: { id?: string; username?: string; email?: string };
+    where: { id?: string; username?: string; email?: string; status?: string };
   }): Promise<User> {
     return this.userModel.findOne({ ...filter });
   }
@@ -20,6 +20,13 @@ export class UsersService {
     CreateUserDto - нужен для создания сущности пользователя
 
   */
+
+  findAll(filter: {
+    where: { id?: string; username?: string; email?: string; status?: string };
+  }): Promise<User[]> {
+    return this.userModel.findAll({ ...filter });
+  }
+
   async create(
     createUserDto: CreateUserDto,
   ): Promise<User | { warningMessage: string }> {
@@ -53,6 +60,7 @@ export class UsersService {
     user.username = createUserDto.username;
     user.password = hashedPassword;
     user.email = createUserDto.email;
+    user.status = createUserDto.status;
 
     //Сохранение пользователя
     return user.save();

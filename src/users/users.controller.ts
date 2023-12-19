@@ -56,4 +56,10 @@ export class UsersController {
     req.session.destroy();
     return { msg: 'session has ended' };
   }
+
+  @Get('/all')
+  async findAllUsers() {
+    const users = await this.usersService.findAll({ where: {} }); // передача пустого фильтра
+    return users;
+  }
 }

@@ -23,6 +23,7 @@ export class ShoppingCartService {
     const user = await this.usersService.findOne({
       where: { username: addToCartDto.username },
     });
+    console.log(addToCartDto);
     const part = await this.boilerPartsService.findOne(addToCartDto.partId);
 
     cart.userId = user.id;
@@ -31,7 +32,7 @@ export class ShoppingCartService {
     cart.parts_manufacturer = part.parts_manufacturer;
     cart.price = part.price;
     cart.in_stock = part.in_stock;
-    cart.image = JSON.parse(part.images)[0];
+    //cart.image = JSON.parse(part.images)[0];
     cart.name = part.name;
     cart.total_price = part.price;
 

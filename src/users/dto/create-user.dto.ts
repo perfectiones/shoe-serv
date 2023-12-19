@@ -13,4 +13,8 @@ export class CreateUserDto {
   @ApiProperty({ example: 'ivan@gmail.com' })
   @IsNotEmpty()
   readonly email: string;
+
+  @ApiProperty({ example: 'admin' })
+  @IsNotEmpty()
+  readonly status: string;
 }

@@ -1,6 +1,7 @@
 import { faker } from '@faker-js/faker';
 import { Op } from 'sequelize';
 import { ApiProperty } from '@nestjs/swagger';
+import { IsNotEmpty } from 'class-validator';
 
 class BoilerParts {
   @ApiProperty({ example: 1 })
@@ -101,6 +102,56 @@ export class SearchRequest {
 export class GetByNameResponse extends BoilerParts {
   @ApiProperty({ example: 'Provident incidunt.' })
   name: string;
+}
+
+export class PostNewBoiler extends BoilerParts {
+  @ApiProperty({ example: faker.lorem.sentence(2) })
+  @IsNotEmpty()
+  boiler_manufacturer: string;
+
+  @ApiProperty({ example: 12345 })
+  @IsNotEmpty()
+  price: string;
+
+  @ApiProperty({ example: faker.lorem.sentence(2) })
+  @IsNotEmpty()
+  parts_manufacturer: string;
+
+  @ApiProperty({ example: faker.internet.password() })
+  @IsNotEmpty()
+  vendor_code: string;
+
+  @ApiProperty({ example: faker.lorem.word() })
+  @IsNotEmpty()
+  name: string;
+
+  @ApiProperty({ example: faker.lorem.sentence() })
+  @IsNotEmpty()
+  description: string;
+
+  @ApiProperty({ example: faker.lorem.sentence() })
+  @IsNotEmpty()
+  compatibility: string;
+
+  @ApiProperty({ example: faker.image.city() })
+  @IsNotEmpty()
+  images: string;
+
+  @ApiProperty({ example: 5 })
+  @IsNotEmpty()
+  in_stock: number;
+
+  @ApiProperty({ example: true })
+  @IsNotEmpty()
+  bestseller: boolean;
+
+  @ApiProperty({ example: false })
+  @IsNotEmpty()
+  new: boolean;
+
+  @ApiProperty({ example: 123 })
+  @IsNotEmpty()
+  popularity: number;
 }
 
 export class GetByNameRequest {

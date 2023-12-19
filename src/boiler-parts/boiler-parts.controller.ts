@@ -1,4 +1,4 @@
-import { Body, Controller, Post } from '@nestjs/common';
+import { Body, Controller, Delete, Patch, Post } from '@nestjs/common';
 import { Get } from '@nestjs/common';
 import { Param, Query, UseGuards } from '@nestjs/common';
 import { BoilerPartsService } from './boiler-parts.service';
@@ -13,6 +13,7 @@ import {
   SearchRequest,
   GetByNameResponse,
   GetByNameRequest,
+  PostNewBoiler,
 } from './types';
 
 @Controller('boiler-parts')
@@ -61,5 +62,28 @@ export class BoilerPartsController {
   @Post('name')
   getByName(@Body() { name }: { name: string }) {
     return this.boilerPartsService.findOneByName(name);
+  }
+
+  @ApiOkResponse({ type: PostNewBoiler })
+  @ApiBody({ type: PostNewBoiler })
+  @UseGuards(AuthenticatedGuard)
+  @Post('create')
+  createBoiler(@Body() el) {
+    return this.boilerPartsService.create(el);
+  }
+
+  @ApiBody({ type: PostNewBoiler })
+  @UseGuards(AuthenticatedGuard)
+  @Patch('update/:id')
+  update(@Body() el) {
+    return this.boilerPartsService.updateBoiler(el);
+  }
+
+  @ApiOkResponse({ type: PostNewBoiler })
+  @ApiBody({ type: PostNewBoiler })
+  @UseGuards(AuthenticatedGuard)
+  @Delete(':id')
+  async deleteBoilerPart(@Param('id') id: number): Promise<void> {
+    return this.boilerPartsService.deleteBoilerPart(id);
   }
 }

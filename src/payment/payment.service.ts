@@ -2,9 +2,14 @@ import { ForbiddenException, Injectable } from '@nestjs/common';
 import axios from 'axios';
 import { MakePaymentDto } from './dto/make-paymen.dto';
 import { CheckPaymentDto } from './dto/check-payment.dto';
+import { OrderService } from 'src/order/order.service';
+import { CreateOrderDto } from 'src/order/dto/create-order.dto';
 
 @Injectable()
 export class PaymentService {
+  //МОЙ КОД
+ // constructor(private readonly OrderService: OrderService) {}
+  //
   async makePayment(makePaymentDto: MakePaymentDto) {
     try {
       const { data } = await axios({
@@ -26,12 +31,11 @@ export class PaymentService {
           capture: true,
           confirmation: {
             type: 'redirect',
-            return_url: 'http://localhost:3001/order',
+            return_url: 'http://localhost:3000/order',
           },
           description: makePaymentDto.description,
         },
       });
-
       return data;
     } catch (error) {
       throw new ForbiddenException(error);
@@ -49,6 +53,7 @@ export class PaymentService {
         },
       });
 
+      //this.OrderService.create();
       return data;
     } catch (error) {
       throw new ForbiddenException(error);

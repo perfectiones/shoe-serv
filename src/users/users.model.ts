@@ -10,4 +10,7 @@ export class User extends Model {
 
   @Column
   email: string;
+
+  @Column
+  status: string;
 }
